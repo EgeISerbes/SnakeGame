@@ -1,0 +1,16 @@
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\SnakeGame.exe
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\SnakeGame.deps.json
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\SnakeGame.runtimeconfig.json
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\SnakeGame.runtimeconfig.dev.json
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\SnakeGame.dll
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\ref\SnakeGame.dll
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\bin\Debug\net5.0\SnakeGame.pdb
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.csprojAssemblyReference.cache
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.AssemblyInfoInputs.cache
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.AssemblyInfo.cs
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.csproj.CoreCompileInputs.cache
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.dll
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\ref\SnakeGame.dll
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.pdb
+C:\Users\egese\OneDrive\Belgeler\GitHub\SnakeGame\obj\Debug\net5.0\SnakeGame.genruntimeconfig.cache
