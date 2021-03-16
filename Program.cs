@@ -3,14 +3,15 @@
 namespace SnakeGame
 {   
     enum States
-    {
+    {   
+        Idle,
         Up,
         Down,
         Left,
         Right,
 
     }
-    class Node
+     public class Node
     {
        public Node next ;
        public char value ;
@@ -18,7 +19,7 @@ namespace SnakeGame
         public Node()
         {
             this.next = null ;
-            this.value = " " ;
+            this.value = ' ' ;
         }
 
         public void changeValue(char val)
@@ -29,9 +30,9 @@ namespace SnakeGame
     }
     public struct Head 
     {
-        Node head ;
-        int row ;
-        int coll ;
+       public Node head ;
+       public int Irow ;
+       public int Icoll ;
 
     }
 
@@ -39,26 +40,18 @@ namespace SnakeGame
     {
          public Node[,] nodeArr ;
          public int row,coll ;
-        public GameArea(int row1, int coll)
+         public int score ;
+        public GameArea()
         {
-            nodeArr = new Node[row,coll];
-            this.row = row;
-            this.coll = coll ;
-            for (int i =0 ;i<row ; i++)
-            {
-                for(int j = 0; j<coll ; j++)
-                {
-                    nodeArr[i,j] = new Node() ;
-                }
-            }
+           
         }
 
         public void showArea()
         {
-            string roof = new string('_',this.row);
+            string roof = new string('_',this.row+2);
             Console.WriteLine(roof);
             char sides = '|';
-            string bottom = new string('-',row);
+            string bottom = new string('T',row+2);
             for(int i =0 ; i<row;i++)
             {
                 Console.Write(sides);
@@ -72,26 +65,169 @@ namespace SnakeGame
         }
     }
 
-    class GameSnake : GameArea
+    class GameSnake : GameArea 
     {
         public Head head ;
-        public GameSnake()
-        {
+        public bool isOver = false ; 
+        public bool isEdible = false;
+        public GameSnake(int row, int coll)
+        {   
             
+            this.nodeArr = new Node[row,coll];
+            this.row = row;
+            this.coll = coll ;
+            for (int i =0 ;i<row ; i++)
+            {
+                for(int j = 0; j<coll ; j++)
+                {
+                    nodeArr[i,j] = new Node() ;
+                }
+            }
         }
 
         public void StartGame()
         {
+            States state = States.Idle ;
+            addValue('o');
+            addValue('x');
+            showArea();
+            while(true)
+            {
 
+            }
+            
         }
+
+        public void addValue(char val)
+        {
+            Random random = new Random() ;
+            int randRow = random.Next(0,this.row)  ;
+            int randColl = random.Next(0,this.coll);
+            nodeArr[randRow,randColl].value = val;
+            if (val == 'o'){
+                head.head = nodeArr[randRow,randColl] ;
+                head.Irow = randRow;
+                head.Icoll = randColl ;
+            }
+        }
+
+        public void goLeft()
+        {
+            int targetRow = head.Irow ;
+            int targetColl = head.Icoll-1 ;
+            if(nodeArr[targetRow,targetColl].value == 'o') 
+            {
+                isOver = true ;
+                return ;
+            }
+            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
+            nodeArr[targetRow,targetColl].next = head.head ;
+            head.head = nodeArr[targetRow,targetColl] ;
+            head.Icoll = targetColl ;
+            if(!isEdible)
+            {
+                Node temp = new Node();
+                temp = head.head ;
+                while(temp.next.next != null)
+                {
+                    temp = temp.next ;
+                }
+                temp.next.value = '';
+                temp.next = null ;
+
+            }
+        }
+        public void goRight()
+        {
+            int targetRow = head.Irow ;
+            int targetColl = head.Icoll+1 ;
+            if(nodeArr[targetRow,targetColl].value == 'o') 
+            {
+                isOver = true ;
+                return ;
+            }
+            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
+            nodeArr[targetRow,targetColl].next = head.head ;
+            head.head = nodeArr[targetRow,targetColl] ;
+            head.Icoll = targetColl ;
+            if(!isEdible)
+            {
+                Node temp = new Node();
+                temp = head.head ;
+                while(temp.next.next != null)
+                {
+                    temp = temp.next ;
+                }
+                temp.next.value = ' ';
+                temp.next = null ;
+
+            }
+        }
+        public void goUp()
+        {
+            int targetRow = head.Irow ;
+            int targetColl = head.Icoll-1 ;
+            if(nodeArr[targetRow,targetColl].value == 'o') 
+            {
+                isOver = true ;
+                return ;
+            }
+            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
+            nodeArr[targetRow,targetColl].next = head.head ;
+            head.head = nodeArr[targetRow,targetColl] ;
+            head.Icoll = targetColl ;
+            if(!isEdible)
+            {
+                Node temp = new Node();
+                temp = head.head ;
+                while(temp.next.next != null)
+                {
+                    temp = temp.next ;
+                }
+                temp.next.value = ' ';
+                temp.next = null ;
+
+            }
+        }
+        public void goDown()
+        {
+            int targetRow = head.Irow +1 ;
+            int targetColl = head.Icoll ;
+            if(nodeArr[targetRow,targetColl].value == 'o') 
+            {
+                isOver = true ;
+                return ;
+            }
+            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
+            nodeArr[targetRow,targetColl].next = head.head ;
+            head.head = nodeArr[targetRow,targetColl] ;
+            head.Icoll = targetColl ;
+            if(!isEdible)
+            {
+                Node temp = new Node();
+                temp = head.head ;
+                while(temp.next.next != null)
+                {
+                    temp = temp.next ;
+                }
+                temp.next.value = ' ';
+                temp.next = null ;
+
+            }
+        }
+
+
+
+
     }
 
 
-    class Program
+    class Program  
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GameSnake game = new GameSnake(9,9);
+            game.StartGame();
         }
     }
 }
