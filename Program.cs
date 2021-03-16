@@ -70,6 +70,8 @@ namespace SnakeGame
         public Head head ;
         public bool isOver = false ; 
         public bool isEdible = false;
+        public bool isOffLimits = false ;
+        public States state = States.Idle ;
         public GameSnake(int row, int coll)
         {   
             
@@ -87,14 +89,22 @@ namespace SnakeGame
 
         public void StartGame()
         {
-            States state = States.Idle ;
+            
             addValue('o');
             addValue('x');
             showArea();
-            while(true)
-            {
-
-            }
+          //  while(true)
+           // {
+                goRight();
+                showArea();
+                goLeft();
+                showArea();
+                goUp();
+                showArea();
+                goDown();
+                showArea();
+                
+            //}
             
         }
 
@@ -112,87 +122,59 @@ namespace SnakeGame
         }
 
         public void goLeft()
-        {
+        {   
+            state = States.Left ;
             int targetRow = head.Irow ;
             int targetColl = head.Icoll-1 ;
-            if(nodeArr[targetRow,targetColl].value == 'o') 
-            {
-                isOver = true ;
-                return ;
-            }
-            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
-            nodeArr[targetRow,targetColl].next = head.head ;
-            head.head = nodeArr[targetRow,targetColl] ;
-            head.Icoll = targetColl ;
-            if(!isEdible)
-            {
-                Node temp = new Node();
-                temp = head.head ;
-                while(temp.next.next != null)
-                {
-                    temp = temp.next ;
-                }
-                temp.next.value = '';
-                temp.next = null ;
-
-            }
+            if(targetColl < 0) isOffLimits = true ;
+            go(targetRow,targetColl);
         }
         public void goRight()
-        {
+        {   
+            state = States.Right ;
             int targetRow = head.Irow ;
             int targetColl = head.Icoll+1 ;
-            if(nodeArr[targetRow,targetColl].value == 'o') 
-            {
-                isOver = true ;
-                return ;
-            }
-            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
-            nodeArr[targetRow,targetColl].next = head.head ;
-            head.head = nodeArr[targetRow,targetColl] ;
-            head.Icoll = targetColl ;
-            if(!isEdible)
-            {
-                Node temp = new Node();
-                temp = head.head ;
-                while(temp.next.next != null)
-                {
-                    temp = temp.next ;
-                }
-                temp.next.value = ' ';
-                temp.next = null ;
-
-            }
+            if(targetColl >=this.coll) isOffLimits = true ;
+            go(targetRow,targetColl);
         }
         public void goUp()
-        {
-            int targetRow = head.Irow ;
-            int targetColl = head.Icoll-1 ;
-            if(nodeArr[targetRow,targetColl].value == 'o') 
-            {
-                isOver = true ;
-                return ;
-            }
-            else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
-            nodeArr[targetRow,targetColl].next = head.head ;
-            head.head = nodeArr[targetRow,targetColl] ;
-            head.Icoll = targetColl ;
-            if(!isEdible)
-            {
-                Node temp = new Node();
-                temp = head.head ;
-                while(temp.next.next != null)
-                {
-                    temp = temp.next ;
-                }
-                temp.next.value = ' ';
-                temp.next = null ;
-
-            }
+        {   
+            state = States.Up ;
+            int targetRow = head.Irow-1 ;
+            int targetColl = head.Icoll ;
+            if(targetRow < 0) isOffLimits = true ;
+            go(targetRow,targetColl);
         }
         public void goDown()
-        {
+        {   
+            state = States.Down ;
             int targetRow = head.Irow +1 ;
             int targetColl = head.Icoll ;
+            if(targetRow>=this.row) isOffLimits = true ;
+            go(targetRow,targetColl);
+        }
+
+        public void go(int targetRow, int targetColl)
+        {   
+            if(isOffLimits)
+            {
+                if (state == States.Left)
+                {
+                    targetColl = coll-1 ;
+                }
+                else if (state == States.Right)
+                {
+                    targetColl = 0 ;
+                }
+                else if (state == States.Up)
+                {
+                    targetRow = 0;
+                }
+                else if (state == States.Down)
+                {
+                    targetRow = row-1 ;
+                }
+            }
             if(nodeArr[targetRow,targetColl].value == 'o') 
             {
                 isOver = true ;
@@ -200,6 +182,7 @@ namespace SnakeGame
             }
             else if (nodeArr[targetRow,targetColl].value == 'x') isEdible = true ;
             nodeArr[targetRow,targetColl].next = head.head ;
+            nodeArr[targetRow,targetColl].value = 'o';
             head.head = nodeArr[targetRow,targetColl] ;
             head.Icoll = targetColl ;
             if(!isEdible)
