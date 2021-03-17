@@ -93,18 +93,11 @@ namespace SnakeGame
             addValue('o');
             addValue('x');
             showArea();
-          //  while(true)
-           // {
-                goRight();
-                showArea();
-                goLeft();
-                showArea();
-                goUp();
-                showArea();
-                goDown();
-                showArea();
+            while(true)
+            {
                 
-            //}
+                
+            }
             
         }
 
@@ -113,11 +106,14 @@ namespace SnakeGame
             Random random = new Random() ;
             int randRow = random.Next(0,this.row)  ;
             int randColl = random.Next(0,this.coll);
+            if (nodeArr[randRow,randColl].value != ' ') addValue(val);
+            else{
             nodeArr[randRow,randColl].value = val;
             if (val == 'o'){
                 head.head = nodeArr[randRow,randColl] ;
                 head.Irow = randRow;
                 head.Icoll = randColl ;
+            }
             }
         }
 
